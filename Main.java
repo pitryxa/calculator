@@ -1,5 +1,3 @@
-package calculator;
-
 import java.math.BigInteger;
 import java.util.*;
 
@@ -10,7 +8,7 @@ public class Main {
                         new InputLine(
                                 new Scanner(System.in)
                         )))
-                .action();
+        .action();
     }
 }
 
@@ -81,7 +79,17 @@ class Command implements InputType {
     }
 
     private void help() {
-        System.out.println("The program calculates the sum of numbers.");
+        System.out.printf("The program calculates the result of an expression with integers. Including big integers.\n" +
+                "Supported parenthesises and the following operations:\n" +
+                "- addition ('+');\n" +
+                "- subtraction ('-'), including an unary minus;\n" +
+                "- multiplication ('*');\n" +
+                "- division ('/');\n" +
+                "- power ('^').\n" +
+                "Supported also latin letters variables.\n" +
+                "Available commands:\n" +
+                "/help - display help\n" +
+                "/exit - exit the program\n");
     }
 
     private void unknown() {
@@ -477,8 +485,8 @@ class PrintVariable implements InputType {
     public void run() {
         System.out.println(
                 vars.containsKey(variable)
-                        ? vars.get(variable)
-                        : "Unknown variable");
+                ? vars.get(variable)
+                : "Unknown variable");
     }
 }
 
@@ -507,6 +515,7 @@ class Action {
 
     public void action() {
         Map<String, BigInteger> vars = new HashMap<>();
+        System.out.println("Smart Calculator. Enter an expression or the /help command.");
 
         while (true) {
             analyzeInput.analyze(vars).run();
